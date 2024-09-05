@@ -7,13 +7,14 @@ PIP := $(VENV_NAME)/bin/pip
 PYTHON_VENV := $(VENV_NAME)/bin/python
 BLACK := $(VENV_NAME)/bin/black
 JUPYTER := $(VENV_NAME)/bin/jupyter
+PYTEST := $(VENV_NAME)/bin/pytest
 KERNEL_NAME := my_project_kernel
 
 # Check if any Python files exist
 PYTHON_FILES := $(shell find . -name "*.py")
 
 # Default target
-all: venv install format install-kernel
+all: venv install format install-kernel test
 
 # Create virtual environment
 venv:
@@ -26,7 +27,7 @@ venv:
 install: venv
 	@echo "Installing dependencies and development tools..."
 	@$(PIP) install --no-cache-dir -r requirements.txt
-	@$(PIP) install black jupyter jupyterlab notebook ipykernel pandas numpy matplotlib seaborn scikit-learn
+	@$(PIP) install black jupyter jupyterlab notebook ipykernel pandas numpy matplotlib seaborn scikit-learn pytest
 	@echo "Dependencies and tools installed successfully."
 
 # Format code using Black if Python files exist
@@ -57,5 +58,12 @@ clean:
 	@rm -rf $(VENV_NAME)
 	@echo "Virtual environment removed."
 
-# Phony targets
-.PHONY: all venv install format install-kernel delete-kernel clean
+# Run tests
+# Run tests
+test: venv
+	@echo "Running tests..."
+	@$(PYTEST) -v tests
+
+# ... rest of the Makefile remains unchanged ...
+
+.PHONY: all venv install format install-kernel delete-kernel clean test
