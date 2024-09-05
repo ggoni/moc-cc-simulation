@@ -1,0 +1,17 @@
+jupyter
+jupyterlab
+notebook
+ipykernel
+ipywidgets
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn
+plotly
+nbconvert
+jedi
+pylint
+autopep8
+flake8
+black
