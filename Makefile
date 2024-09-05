@@ -30,15 +30,11 @@ install: venv
 	@$(PIP) install black jupyter jupyterlab notebook ipykernel pandas numpy matplotlib seaborn scikit-learn pytest
 	@echo "Dependencies and tools installed successfully."
 
-# Format code using Black if Python files exist
+# Format code using Black
 format: venv
-	@if [ -n "$(PYTHON_FILES)" ]; then \
-		echo "Formatting code with Black..."; \
-		$(BLACK) .; \
-		echo "Code formatting complete."; \
-	else \
-		echo "No Python files found. Skipping formatting."; \
-	fi
+	@echo "Formatting code with Black..."
+	@$(BLACK) src tests
+	@echo "Code formatting complete."
 
 # Install Jupyter kernel
 install-kernel: install
